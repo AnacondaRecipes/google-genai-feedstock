@@ -1,0 +1,71 @@
+{% set name = "google-genai" %}
+{% set version = "1.38.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/googleapis/python-genai/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: da73c69fc8d42152fab7cfb89c30f13b9379e8d15b131c1feb8675e10c302585
+build:
+  number: 0
+  skip: True # [py<39]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - wheel
+    # - twine >=6.1.0
+    - packaging >=24.2
+    - pkginfo >=1.12.0
+    - pip
+  run:
+    - python
+    - anyio >=4.8.0,<5.0.0
+    - google-auth >=2.14.1,<3.0.0
+    - httpx >=0.28.1,<1.0.0
+    - pydantic >=2.0.0,<3.0.0
+    - requests >=2.28.1,<3.0.0
+    - tenacity >=8.2.3,<9.2.0
+    - websockets >=13.0.0,<15.1.0
+    - typing_extensions >=4.11.0,<5.0.0
+
+test:
+  source_files:
+    - google/genai
+  imports:
+    - google.genai
+    - google.genai.types
+  commands:
+    - pip check
+    - export GOOGLE_GENAI_REPLAYS_DIRECTORY=${PREFIX}/test_replays # [not win]
+    - set GOOGLE_GENAI_REPLAYS_DIRECTORY=${PREFIX}/test_replays # [win]
+    - pytest -v google/genai/tests
+  requires:
+    - pip
+    - mcp
+    - pytest
+    - protobuf
+    - sentencepiece
+    - pillow
+    - pytest-asyncio
+
+about:
+  home: https://github.com/googleapis/python-genai
+  summary: GenAI Python SDK
+  description: |
+    Google Gen AI Python SDK provides an interface for developers to integrate
+    Google's generative models into their Python applications. It supports the
+    Gemini Developer API and Vertex AI APIs.
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  dev_url: https://github.com/googleapis/python-genai
+  doc_url: https://googleapis.github.io/python-genai
+
+extra:
+  recipe-maintainers:
+    - hadim
