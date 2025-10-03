@@ -1,0 +1,14 @@
+diff --git a/google/genai/tests/types/test_types.py b/google/genai/tests/types/test_types.py
+index f85cdc6..83aaa03 100644
+--- a/google/genai/tests/types/test_types.py
++++ b/google/genai/tests/types/test_types.py
+@@ -17,7 +17,8 @@
+ import copy
+ import sys
+ import typing
+-from typing import Optional, assert_never
++from typing import Optional
++from typing_extensions import assert_never
+ import pydantic
+ import pytest
+ from ... import types
