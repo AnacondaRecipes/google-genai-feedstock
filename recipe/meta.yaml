@@ -1,5 +1,5 @@
 {% set name = "google-genai" %}
-{% set version = "1.38.0" %}
+{% set version = "1.41.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name.split('-')[0] }}apis/python-{{ name.split('-')[1] }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: da73c69fc8d42152fab7cfb89c30f13b9379e8d15b131c1feb8675e10c302585
+  sha256: 4849f3c7e5d313806e4563039230f31bea075b21665364cdba40f7b90bca0310
   patches:            # [py<311]
     - fix_tests.patch # [py<311]
 
@@ -43,6 +43,7 @@ requirements:
 
 #E  All of these tests requires credentials or API_KEY (google.auth.exceptions.DefaultCredentialsError: Your default credentials were not found)
 {% set ignored_tests = [
+  "--ignore=google/genai/tests/shared",
   "--ignore=google/genai/tests/files",
   "--ignore=google/genai/tests/models",
   "--ignore=google/genai/tests/tokens",
