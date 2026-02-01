@@ -83,7 +83,8 @@ test:
     - pip
     - mcp # [py<314]
     # Newer pytest version provoke errors because of deprecated fextures in tests
-    - pytest 8.3.4 
+    - pytest 8.3.4 # [py<314]
+    - pytest >=9.0.0 # [py314]
     - protobuf
     - sentencepiece
     - pillow
