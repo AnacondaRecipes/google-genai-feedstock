@@ -39,7 +39,7 @@ requirements:
     - sniffio
   run_constrained:
     # aiohttp
-    - aiohttp <4.0.0
+    - aiohttp <3.13.3
     # local-tokenizer
     - sentencepiece >=0.2.0
 
