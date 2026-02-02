@@ -12,6 +12,7 @@
 !/**/
 # Don't ignore any files/folders recursively in the following folders
 !/recipe/**
+!/abs.yaml
 !/.ci_support/**
 
 # Since we ignore files/folders recursively, any folders inside
