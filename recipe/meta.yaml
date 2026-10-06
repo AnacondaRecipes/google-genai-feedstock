@@ -1,13 +1,13 @@
 {% set name = "google-genai" %}
-{% set version = "2.11.0" %}
+{% set version = "2.25.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/{{ name.split('-')[0] }}apis/python-{{ name.split('-')[1] }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e93e3e6397c89c81bf8725de4edcbea6c1370564fead704e2b9a3d0fa83002bc
+  sha256: a0f9d520b4fa7dbdd017ae50fe9c04cfe41e1a7eeeb3c1ea2f77bebf2759f8a3
   patches:  # [py<311]
     - fix_tests.patch  # [py<311]
 
@@ -28,7 +28,7 @@ requirements:
   run:
     - python
     - anyio >=4.8.0,<5.0.0
-    - google-auth >=2.48.1,<3.0.0
+    - google-auth >=2.56.1,<3.0.0
     - httpx >=0.28.1,<1.0.0
     - pydantic >=2.12.5,<3.0.0
     - requests >=2.28.1,<3.0.0
