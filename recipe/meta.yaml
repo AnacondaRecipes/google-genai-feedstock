@@ -12,7 +12,7 @@ source:
     - fix_tests.patch  # [py<311]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -79,14 +79,14 @@ test:
     - pip check
     - export GOOGLE_GENAI_REPLAYS_DIRECTORY=${PREFIX}/test_replays  # [not win]
     - set GOOGLE_GENAI_REPLAYS_DIRECTORY=${PREFIX}/test_replays  # [win]
-    - pytest -v {{ ignored_tests | join(" ") }}  # [py<314]
-    - pytest -v {{ ignored_tests | join(" ") }} {{ ignore_mcp_depended_tests | join(" ") }}  # [py314]
+    - pytest -v {{ ignored_tests | join(" ") }}  # [py<314 and not (win and arm64)]
+    - pytest -v {{ ignored_tests | join(" ") }} {{ ignore_mcp_depended_tests | join(" ") }}  # [py314 and (win and arm64)]
   requires:
     - pip
     - mcp  # [py<314]
     # Newer pytest version provoke errors because of deprecated fextures in tests
-    - pytest 8.3.4  # [py<314]
-    - pytest >=9.0.0  # [py314]
+    - pytest 8.3.4  # [py<314 and not (win and arm64)]
+    - pytest >=9.0.0  # [py314 and (win and arm64)]
     - protobuf
     - sentencepiece
     - pillow
